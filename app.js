@@ -43,7 +43,7 @@ app.use(express.json());
 app.use("/", shopRouter);
 app.use("/login", require("./routes/login"));
 app.use("/admin", require("./routes/admin"));
-
+app.use("/category", require("./routes/category")); 
 
 //app.use("/routeName", require("./routes/routeName"));
 
