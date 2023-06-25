@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title>Login</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <nav class="slogan-nav">
+        <a href="/"><img src="../assets/images/logo.png" href="/" class="icon-img"></a>
+      <ul class="nav justify-content-center">
+        <li class="nav-item"><a href="#">Home</a></li>
+        <li class="nav-item"><a href="admin">Admin</a></li>
+        <li class="nav-item"><a href="about">About Us</a></li>
+      </ul>
+    </nav>
+    <div class="container" id="container">
+      <form class="form-container">
+        <div class="form-field">
+          <label class="form-field-label">Username:</label>
+          <input type="text" id="username" class="form-input-field" name="username" /><br />
+        </div>
+        <div class="form-field">
+          <label class="form-field-label">Password:</label>
+          <input type="password" id="password" class="form-input-field" name="password" /><br />
+        </div>
+        <div class="login-button-container">
+            <div id="login-btn" onclick="handleLogin()">
+                Login
+            </div>
+        </div>
+      </form>
+      <div id="errors-container"></div>
+    </div>
+  </body>
+</html>
