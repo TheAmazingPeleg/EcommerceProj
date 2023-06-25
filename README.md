@@ -1,2 +1,2 @@
 # EcommerceProj
-Ecommerce project - build with Node.js, Vue.js, Express, MongoDB Core
+Ecommerce project - build with Node.js, Express, MongoDB Core
