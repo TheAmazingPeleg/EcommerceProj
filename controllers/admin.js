@@ -1,4 +1,5 @@
-const adminService = require("../models/admin");
+const adminService = require("../services/admin");
+
 
 const index = (req, res) => {
     res.render("../views/admin.ejs");
