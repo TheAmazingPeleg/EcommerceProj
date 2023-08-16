@@ -1,3 +1,15 @@
+const loginMode = document.getElementById("loginMode");
+const loginModeHead = document.getElementById("loginModeHead");
+if(window.location.search === "?pathToRedirect=/admin"){
+  loginMode.innerText = "Login as User >";
+  loginMode.href = "login";
+  loginModeHead.innerText = "Admin Login";
+}else{
+  loginMode.innerText = "Login as Admin >";
+  loginMode.href = "login?pathToRedirect=/admin";
+  loginModeHead.innerText = "Login";
+}
+
 const renderError = ({ errors }) => {
     const errorsElement = document.getElementById("errors-container");
   
@@ -10,9 +22,9 @@ const renderError = ({ errors }) => {
     }
   
     errorsElement.style.display = "block";
-  };
+};
   
-  const handleLogin = () => {
+const handleLogin = () => {
     const username = $("#username").val();
     const password = $("#password").val();
   
@@ -47,4 +59,4 @@ const renderError = ({ errors }) => {
         },
       });
     }
-  };
+};

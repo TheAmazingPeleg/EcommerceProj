@@ -1,16 +1,24 @@
 const Admin = require("../models/admin");
 const bcrypt = require("bcryptjs");
 
-const createAdmin = async ({ username, password }) => {
+const createAdmin = async ({ username, password, ...props }) => {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const admin = new Admin({ username, password: hashedPassword });
+    const admin = new Admin({ username, password: hashedPassword, ...props });
     await admin.save();
     return admin;
 };
 
 const getAdmin = async (username) => {
     const admin = await Admin.findOne({ username });
-    return admin;
+    const id = username;
+    if(admin)
+        return admin;
+    else if(id.match(/^[0-9a-fA-F]{24}$/)){
+        const adminById = await Admin.find({ _id: id });
+        return adminById;
+    }else{
+        return;
+    }
 };
   
 const getAdmins = async (options = {}) => {
@@ -33,7 +41,7 @@ const deleteAdmin = async (id) => {
 const initFirstAdmin = async() => {
     const adminsList = await getAdmins();
     if(adminsList.length === 0){
-        const admin = createAdmin({ username: "admin", password: "123" });
+        const admin = createAdmin({ username: "admin", password: "123", image: "../assets/images/userIcon.png"});
     }
 }
 initFirstAdmin();

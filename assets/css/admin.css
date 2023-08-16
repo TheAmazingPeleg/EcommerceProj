@@ -1,0 +1,75 @@
+body {
+    margin: 0px;
+    overflow-x: hidden;
+}
+#wrapper {
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+}
+.sidebar {
+    background-color: black;
+    height: 100vh;
+    padding: 0px;
+}
+.sidebar img {
+    width: 100%;
+    border-bottom: 1px solid black;
+}
+header {
+    height: 50px;
+    background: #B7E8E1;
+}
+span {
+    background-color: #BDEEE7;
+    color: black;
+    font-size: 1.5em;
+    height: 50px;
+    padding-top: 5px;
+}
+.listItem {
+    margin: 10px 0px;
+    font-size: 1.2em;
+    padding: 5px;
+    color: lightgrey;
+}
+.listItem:hover {
+    color: black;
+    margin: 10px;
+    transition: 0.1s;
+    background-color: #BDEEE7;
+    text-decoration: none;
+
+}
+.adminIcon {
+    height: 50px;
+    padding: 0px 10px;
+    border-left: 1px solid grey;
+}
+nav ul {
+    list-style-type: none;
+}
+.navbar {
+    border-radius: 0px;
+    direction: ltr;
+}
+.navbar li {
+    font-size: 20px;
+    color: white;
+    padding: 0px 10px;
+}
+.navbar li p {
+    padding-top: 4px;
+}
+.actionItem:hover {
+    color: black;
+    padding-top: 2px;
+    border-bottom: 2px solid black;
+    transition: 0.1s;
+}
+.right-item {
+    float: right;
+}
+.left-item {
+    float: left;
+}

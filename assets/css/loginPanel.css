@@ -1,0 +1,35 @@
+body {
+    margin: 0px;
+}
+.topNav-buttons {
+    position: absolute;
+    top: 0px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.topNav-buttons a {
+    padding: 10px;
+    transition: 0.2s;
+    font-size: 1.4em;
+}
+.topNav-buttons a:hover {
+    padding: 10px;
+    color: #EB1764;
+    text-decoration: none;
+}
+.container {
+    padding: 20px;
+    margin-top: 5%;
+    background-color: rgb(252, 244, 231);
+    border-radius: 25px;
+    border: 2px solid rgb(184, 165, 141);
+    width: 50%;
+}
+img {
+    width: 200px;
+    padding: 10px;
+    border: 2px solid black;
+    background-color: white;
+    margin: 10px;
+}

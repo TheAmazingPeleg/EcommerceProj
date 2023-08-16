@@ -49,6 +49,7 @@ app.use(express.json());
 //Routes
 app.use("/", shopRouter);
 app.use("/login", require("./routes/login"));
+app.use("/logout", require("./routes/logout"));
 app.use("/admin", require("./routes/admin"));
 
 //app.use("/routeName", require("./routes/routeName"));
