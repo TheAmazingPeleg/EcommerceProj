@@ -8,6 +8,22 @@ body {
     font-size: 20px;
     color: #111;
   }
+  h5 {
+    color: black;
+    font-size: 16px;
+  }
+  .showImage {
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid black;
+    transition: 0.2s;
+  }
+  .showImage:hover {
+    background-color: #d5d5d5;
+  }
+  #img1{
+    border: 1px solid black;
+  }
   .container {
     padding: 80px 120px;
   }
@@ -113,6 +129,25 @@ body {
     letter-spacing: 4px;
     opacity: 0.9;
   }
+  #searchHolder {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  #searchButton {
+    position: relative;
+    top: 4px;
+  }
+  #searchElem {
+    position: relative;
+    top: -4px;
+    color: black;
+  }
+  #searchElem input {
+    border-radius: 50px;
+    padding: 0px 5px;
+    width: 200px;
+  }
   .navbar li a, .navbar .navbar-brand { 
     color: #d5d5d5 !important;
   }
@@ -138,6 +173,13 @@ body {
     color: #fff;
     background-color: #555 !important;
   }
+  #searchRows{
+    position: absolute;
+    top: 30px;
+    background-color: white;
+    width: 200px;
+    z-index: 1;
+  };
   .dropdown-menu li a {
     color: #000 !important;
   }

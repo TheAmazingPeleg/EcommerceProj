@@ -35,7 +35,7 @@ const handleLogin = () => {
     }
   
     if (password.length == 0) {
-      clientSideValidationErrors.push(`password can't be empty`);
+      clientSideValidationErrors.push(`Password can't be empty`);
     }
   
     if (clientSideValidationErrors.length > 0) {
