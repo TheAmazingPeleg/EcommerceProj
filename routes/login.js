@@ -2,7 +2,8 @@ const express = require("express");
 
 const {
     index,
-    login
+    login,
+    logout
 } = require("../controllers/login");
 
 const {redirectIfAuthenticated} = require("./modularLogin")

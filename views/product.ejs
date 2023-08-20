@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Ecommerce Project</title>
+  <link rel="icon" href="../assets/images/favicon.ico">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/category.css">
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar" style="background-color: #ED2E73;"></span>
+          <span class="icon-bar" style="background-color: #ED2E73;"></span>
+          <span class="icon-bar" style="background-color: #ED2E73;"></span>
+        </button>
+        <a class="navbar-brand" href="/"><img src="../assets/images/emptyLogo.png" alt="logo" width="71px" height="71px"></a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a id="searchHolder"><span class="glyphicon glyphicon-search" id="searchButton" onclick="searchInit()"></span><span id="searchElem"></span></a></li>
+          <% categories.forEach((categry) => {
+            %>
+              <li><a href="/<%=categry.name %>"><%= categry.name %></a></li>
+            <%
+          }) %>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-shopping-cart"></span>
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Merchandise</a></li>
+              <li><a href="#">Extras</a></li>
+              <li><a href="#">Media</a></li> 
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <script>
+    let image;
+    const replaceImages = (e) => {
+      const mainImg = document.getElementById('img1');
+      let tempSrc = mainImg.src;
+      mainImg.src = e.target.src;
+      e.target.src = tempSrc;
+    }
+  </script>
+<!-- Container -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="row">
+        <div class="col-sm-12">
+          <img src="<%= product.images[0]; %>" id="img1" class="showImage" />
+        </div>
+        <% for(let index = 1; index < product.images.length; index ++){ %>
+          <div class="col-sm-3">
+            <img src="<%= product.images[index] %>" id="img<%= (index + 1) %>" class="showImage" />
+            <script>
+              image = document.getElementById('img<%= (index + 1) %>');
+              image.addEventListener('click', replaceImages);
+            </script>
+          </div>
+        <% } %>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <h1><%= product.name %></h1>
+      <p><em><%= product.description %></em></p>
+      <% if(product.amount > 0){ %>
+      <form>
+        <input type="hidden" name="productId" value="<%= product._id %>"/>
+        <h5>Colors: </h5>
+        <select name="productColor" style="float: left; width: 100px; margin-right: 10px;" id="selectColor" >
+        <% product.colors.forEach((color) => { %>
+          <option value="<%= color %>">#<%= color %></option>
+        <% }) %>
+        </select>
+        <div style="float: left; border: 1px solid black; border-radius: 20px; width: 20px; height: 20px" id="colorizedDiv">#<%= product.colors[0] %></div>
+        <script>
+          const colorizedDiv = document.getElementById('colorizedDiv');
+          colorizedDiv.style.backgroundColor = colorizedDiv.innerHTML;
+          colorizedDiv.innerHTML = "";
+          const changeColor = (e) => {
+            console.log(e.target.value);
+            colorizedDiv.style.backgroundColor = '#' + e.target.value;
+          }
+          const selectColor = document.getElementById('selectColor');
+          selectColor.addEventListener('change', changeColor);
+        </script><br>
+        <h5>Sizes: </h5>
+        <select name="productSize">
+          <% product.sizes.forEach((size) => { %>
+            <option value="<%= size %>"><%= size %></option>
+          <% }) %>
+        </select><br>
+        <lable for="amount">Amount</lable>
+        <input type="text" name="productAmount" /><br><br>
+        <div class="btn btn-primary" onclick="addToCart()">Add to cart</div>
+      </form>
+      <% }else{ %>
+        <h3 style="background-color: crimson; text-align: center; color: white; padding: 10px 0px;">Out of Stock!</h3>
+      <% } %>
+    </div>
+  </div>
+</div>
+<div class="bg-1">
+  <div class="container">
+    <div class="row text-center">
+    <%
+      let i = 0;
+      products.forEach((item) => {
+        if(item.name !== product.name){
+          if(i === 3){
+            return;
+          }
+          %>
+            <div class="col-sm-4">
+              <div class="thumbnail">
+                <div class="productImage">
+                  <img src="<%= item.images[0] %>" alt="<%= item.name %>" class="productImage-main">
+                  <img src="<%= item.images[1] %>" alt="<%= item.name %>" class="productImage-hover">
+                </div>
+                <p><strong><%= item.name %></strong></p>
+                <p><%= item.description %></p>
+                <a href="<%= category.name %>/<%= item._id %>"><button class="btn">View Product</button></a>
+              </div>
+            </div>
+          <%
+          i ++;
+        }
+    });
+    if(i % 3 !== 2){
+      %>
+              </div>
+            </div>
+          </div>
+          <%
+    }
+    %>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+  </a><br><br>
+  <p>Copyright © 2023 Ecommerce Project</p> 
+</footer>
+<script src="/assets/js/main.js"></script>
+</body>
+</html>

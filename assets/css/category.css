@@ -1,0 +1,22 @@
+.productImage {
+    position: relative;
+    transition-duration: 0.5s;
+
+}
+.productImage-main {
+    width: 100%;
+}
+.productImage-hover {
+    width: 100%;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    display: none;
+}
+.productImage:hover .productImage-hover {
+    display: inline;
+
+}
+.productImage:hover .productImage-main {
+    display: none;
+}

@@ -16,6 +16,13 @@ mongoose.set('strictQuery', false);
 mongoose.connect(process.env.CONNECTION_STRING, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+})
+.then(() => {
+  console.log("[MongoDB] Successfully connected.");
+})
+.catch(err => {
+  console.error("[MongoDB] Connection error.", err);
+  process.exit();
 });
 
 var app = express();
@@ -40,11 +47,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
 //Routes
-app.use("/", shopRouter);
 app.use("/login", require("./routes/login"));
+app.use("/logout", require("./routes/logout"));
 app.use("/admin", require("./routes/admin"));
-app.use("/category", require("./routes/category")); 
-
+app.use("/", shopRouter);
 //app.use("/routeName", require("./routes/routeName"));
 
 app.listen(process.env.PORT || 8080);

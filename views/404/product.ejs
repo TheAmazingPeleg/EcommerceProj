@@ -11,7 +11,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="/assets/css/main.css">
-  <link rel="stylesheet" href="/assets/css/category.css">
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
 
@@ -47,70 +46,12 @@
     </div>
   </nav>
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-      <div class="item active">
-        <div class="inner-img-container">
-          <img src="../assets/images/slider/slider_1.jpg" alt="SunGlasses Model">
-        </div>
-        <div class="carousel-caption">
-          <h3><%= category.name %></h3>
-          <p><%= category.slogan %><p>
-        </div>      
-      </div>
-    </div>
+<!-- Container (The Band Section) -->
+<div id="band" class="container text-center">
+  <h3>404</h3>
+  <p><em>Category wasn't found!</em></p>
+  <p>We are sorry, you mistyped the category name. please try again!</p>
 </div>
-
-<%
-  let i = 0, j = 0;
-  products.forEach((product) => {
-    if(i % 3 === 0){
-      if(j % 2 === 0){
-        %>
-        <div>
-        <%
-      }else{
-        %>
-        <div class="bg-1">
-        <%
-      }
-      %>
-      <div class="container">
-        <div class="row text-center">
-      <%
-      j ++;
-    }
-    %>
-      <div class="col-sm-4">
-        <div class="thumbnail">
-          <div class="productImage">
-            <img src="<%= product.images[0] %>" alt="<%= product.name %>" class="productImage-main">
-            <img src="<%= product.images[1] %>" alt="<%= product.name %>" class="productImage-hover">
-          </div>
-          <p><strong><%= product.name %></strong></p>
-          <p><%= product.description %></p>
-          <a href="<%= category.name %>/<%= product._id %>"><button class="btn">View Product</button></a>
-        </div>
-      </div>
-    <%
-    if(i % 3 === 2){
-      %>
-          </div>
-        </div>
-      </div>
-      <%
-    }
-    i ++;
-});
-if(i % 3 !== 2){
-  %>
-          </div>
-        </div>
-      </div>
-      <%
-}
-%>
 
 <!-- Footer -->
 <footer class="text-center">
