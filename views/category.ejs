@@ -35,11 +35,10 @@
           }) %>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-shopping-cart"></span>
-            <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Merchandise</a></li>
-              <li><a href="#">Extras</a></li>
-              <li><a href="#">Media</a></li> 
+            <span id="cartAmount"></span>
+            <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" id="navBarCart">
             </ul>
           </li>
         </ul>
@@ -89,6 +88,7 @@
             <img src="<%= product.images[1] %>" alt="<%= product.name %>" class="productImage-hover">
           </div>
           <p><strong><%= product.name %></strong></p>
+          <em>&#8362;<del><%= product.priceBeforeDiscount %></del> - &#8362;<%= product.price %></em><br />
           <p><%= product.description %></p>
           <a href="<%= category.name %>/<%= product._id %>"><button class="btn">View Product</button></a>
         </div>

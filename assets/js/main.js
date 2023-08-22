@@ -150,6 +150,10 @@ $(document).ready(function(){
     // Create a new item object
     let newItem = {
         id: id,
+        name: filteredRows[0].name,
+        category: filteredRows[0].categories[0],
+        image: filteredRows[0].images[0],
+        price: filteredRows[0].price,
         color: color,
         size: size,
         amount: amount
@@ -168,4 +172,91 @@ $(document).ready(function(){
 
     // Update the cart data in localStorage
     localStorage.setItem('cart', JSON.stringify(cart));
+    alert(newItem.name + 'added to the cart!');
+    initCart();
 }
+
+let cart = [];
+const cartAmount = document.getElementById('cartAmount');
+const productsInCart = document.getElementById('productsInCart'); 
+const fullCart = document.getElementById('fullCart'); 
+const navBarCart = document.getElementById('navBarCart');
+const removeFromCart = (id, size, color) => {
+    const filteredCart = cart.filter((item) => {
+        if(item.id === id && item.size === size && item.color === color)
+            return false;
+        return true;
+    });
+    localStorage.setItem('cart', JSON.stringify(filteredCart));
+    initCart();
+}
+const goToCart = () => {
+    window.location.pathname = "/cart";
+}
+const initCart = () => {
+    navBarCart.innerHTML = '';
+    if(localStorage.getItem('cart') == 'undefined'){
+        localStorage.removeItem('cart');
+    }
+    if(localStorage.getItem('cart')){
+        cart = JSON.parse(localStorage.getItem('cart'));
+        if(cart.length !== 0){
+            if(productsInCart)
+                productsInCart.innerText = cart.length;
+            cartAmount.innerText = cart.length;
+            let total = 0;
+            cart.forEach((item) => {
+                total += item.amount * item.price;
+                let itemElem = document.createElement('li');
+                itemElem.style.width = "100%";
+                itemElem.style.position = "relative";
+                itemElem.style.display = "flex";
+                itemElem.innerHTML = "<a style=\"width: 100%; padding-right: 50px;\" href=\"\\" + item.category + "\\"+ item.id +"\"><img src=\"" + item.image + "\" height=\"30px\" width=\"30px\"/>" + item.name + " '" + item.size + "' - " + item.amount + ": <p style=\"float: left; border: 1px solid black; border-radius: 10px; margin-top: 10px; width: 10px; height: 10px; background: #" + item.color + "\"></p> <em style=\"font-size: 12px;\">&#8362;" + item.price * (item.amount) + "<em></a><span class=\"glyphicon glyphicon-remove\" style=\"position: absolute; top: 12px; right: 0px;\" onclick=\"removeFromCart('" + item.id + "','" + item.size + "','" + item.color + "')\">";
+                navBarCart.appendChild(itemElem);
+            });
+            const itemElem = document.createElement('li');
+            itemElem.style.textAlign = "center";
+            itemElem.innerHTML = "<em>Total: &#8362;" + total + "</em>";
+            navBarCart.prepend(itemElem);
+            if(fullCart){
+                cart.forEach((item) => {
+                    let itemElem = document.createElement('li');
+                    itemElem.classList = "list-group-item d-flex justify-content-between lh-condensed";
+                    itemElem.innerHTML = "<a style=\"display: flex\" href=\"\\" + item.category + "\\"+ item.id +"\"><img src=\"" + item.image + "\" height=\"30px\" width=\"30px\"/><em style=\"margin: 0px 10px\">" + item.name + "</em><p style=\"border: 1px solid black; border-radius: 10px; margin-top: 10px; width: 10px; height: 10px; background: #" + item.color + "\"></p><p style=\"margin: 0px 10px;\">'" + item.size + "' - " + item.amount + "</p><span>&#8362;" + item.price * (item.amount) + "<span></a><span class=\"glyphicon glyphicon-remove\" style=\"position: absolute; top: 16px; right: 5px;\" onclick=\"removeFromCart('" + item.id + "','" + item.size + "','" + item.color + "')\">";
+                    fullCart.appendChild(itemElem);
+                });
+                const itemElem = document.createElement('li');
+                itemElem.style.textAlign = "center";
+                itemElem.classList = "list-group-item d-flex justify-content-between lh-condensed";
+                itemElem.innerHTML = "<em>Total: &#8362;" + total + "</em>";
+                fullCart.prepend(itemElem);
+            }
+        }else{
+            cartEmpty();
+        }
+    }else{
+        cartEmpty();
+    }
+    const goToCart = document.createElement('li');
+    goToCart.style.textAlign = "center";
+    goToCart.innerHTML = "<div class=\"btn btn-primary\" onclick=\"goToCart()\">Cart</div>";
+    navBarCart.appendChild(goToCart);
+}
+const cartEmpty = () => {
+    if(productsInCart)
+        productsInCart.innerText = 0;
+    cartAmount.innerText = 0;
+    let noItems = document.createElement('li');
+    noItems.style.textAlign = "center";
+    noItems.innerText = "No items in cart";
+    navBarCart.appendChild(noItems);
+    if(fullCart){
+        fullCart.innerHTML = '';
+        let itemElem = document.createElement('li');
+        itemElem.style.textAlign = "center";
+        itemElem.classList = "list-group-item d-flex justify-content-between lh-condensed";
+        itemElem.innerHTML = "No items in cart";
+        fullCart.appendChild(itemElem);
+    }
+}
+initCart();

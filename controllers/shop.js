@@ -1,33 +1,61 @@
 const productService = require("../services/product.js");
 const categoryService = require("../services/category");
+const userService = require("../services/user");
+
+const userCheck = async (req, res) => {
+  if(req.session.userId)
+    return await userService.getUserById(req.session.userId);
+  return newItem = {
+    id: '',
+    username: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    address: '',
+    country: '',
+    city: '',
+    zip: ''
+  };
+}
 
 const index = async (req, res) => {
   const products = await productService.getProducts();
   const categories = await categoryService.getCategories();
-  res.render("../views/shop", { products, categories });
+  const user = userCheck(req, res);
+  res.render("../views/shop", { products, categories, user });
 };
+
+const cart = async (req, res) => {
+  const products = await productService.getProducts();
+  const categories = await categoryService.getCategories();
+  const user = userCheck(req, res);
+  res.render("../views/cart", { products, categories, user });
+};
+
 
 const category = async (req, res) => {
   const categories = await categoryService.getCategories();
+  const user = userCheck(req, res);
   if(req.params.category){
     const category = await categoryService.getCategoryByName(req.params.category);
     if(category){
       const products = await productService.getProducts(1, {categories: category.name});
-      res.render("../views/category", { products, categories, category });
+      res.render("../views/category", { products, categories, category, user });
     }else{
-      res.render("../views/404/category", { categories })
+      res.render("../views/404/category", { categories, user })
     }
   }else{
-    res.render("../views/404/category", { categories })
+    res.render("../views/404/category", { categories, user })
   }
 };
 
 const product = async (req, res) => {
+  const user = userCheck(req, res);
   const categories = await categoryService.getCategories();
   const product = await productService.getProductById(req.params.product);
   const category = await categoryService.getCategoryByName(req.params.category);
   const products = await productService.getProductsByCategoryName(req.params.category);
-  res.render("../views/product", { categories, product, category, products });
+  res.render("../views/product", { categories, product, category, products, user });
 };
 
 const createCategory = async (req, res) => {
@@ -155,6 +183,7 @@ const updateProduct = async (req, res) => {
 
 module.exports = {
   index,
+  cart,
   category,
   product,
   getCategories,
