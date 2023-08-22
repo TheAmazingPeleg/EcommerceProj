@@ -35,11 +35,10 @@
           }) %>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-shopping-cart"></span>
-            <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Merchandise</a></li>
-              <li><a href="#">Extras</a></li>
-              <li><a href="#">Media</a></li> 
+            <span id="cartAmount"></span>
+            <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" id="navBarCart">
             </ul>
           </li>
         </ul>
@@ -64,7 +63,7 @@
           <img src="<%= product.images[0]; %>" id="img1" class="showImage" />
         </div>
         <% for(let index = 1; index < product.images.length; index ++){ %>
-          <div class="col-sm-3">
+          <div class="productTinyImages">
             <img src="<%= product.images[index] %>" id="img<%= (index + 1) %>" class="showImage" />
             <script>
               image = document.getElementById('img<%= (index + 1) %>');
@@ -76,7 +75,7 @@
     </div>
     <div class="col-sm-8">
       <h1><%= product.name %></h1>
-      <p><em><%= product.description %></em></p>
+      <p><em><b>&#8362;<del><%= product.priceBeforeDiscount %></del> - &#8362;<%= product.price %></b><br><%= product.description %></em></p>
       <% if(product.amount > 0){ %>
       <form>
         <input type="hidden" name="productId" value="<%= product._id %>"/>
@@ -132,6 +131,7 @@
                   <img src="<%= item.images[1] %>" alt="<%= item.name %>" class="productImage-hover">
                 </div>
                 <p><strong><%= item.name %></strong></p>
+                <em>&#8362;<del><%= product.priceBeforeDiscount %></del> - &#8362;<%= product.price %></em>
                 <p><%= item.description %></p>
                 <a href="<%= category.name %>/<%= item._id %>"><button class="btn">View Product</button></a>
               </div>

@@ -20,3 +20,8 @@
 .productImage:hover .productImage-main {
     display: none;
 }
+.productTinyImages {
+    width: 20%;
+    margin: 1% 2.5%;
+    float: left;
+}

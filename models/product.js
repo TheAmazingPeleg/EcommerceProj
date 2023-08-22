@@ -18,7 +18,7 @@ const Product = new Schema({
         type: Array,
         required: true
     },
-    priceBeforeDiscout: {
+    priceBeforeDiscount: {
         type: Number,
         required: true
     },
