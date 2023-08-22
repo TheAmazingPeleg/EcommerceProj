@@ -2,9 +2,9 @@ const productService = require("../services/product.js");
 const categoryService = require("../services/category");
 const userService = require("../services/user");
 
-const userCheck = async (req, res) => {
-  if(req.session.userId)
-    return await userService.getUserById(req.session.userId);
+const userCheck = async (id) => {
+  if(id !== undefined)
+    return await userService.getUserById(id);
   return newItem = {
     id: '',
     username: '',
@@ -21,21 +21,21 @@ const userCheck = async (req, res) => {
 const index = async (req, res) => {
   const products = await productService.getProducts();
   const categories = await categoryService.getCategories();
-  const user = userCheck(req, res);
+  const user = await userCheck(req.session.userId);
   res.render("../views/shop", { products, categories, user });
 };
 
 const cart = async (req, res) => {
   const products = await productService.getProducts();
   const categories = await categoryService.getCategories();
-  const user = userCheck(req, res);
+  const user = await userCheck(req.session.userId);
   res.render("../views/cart", { products, categories, user });
 };
 
 
 const category = async (req, res) => {
   const categories = await categoryService.getCategories();
-  const user = userCheck(req, res);
+  const user = await userCheck(req.session.userId);
   if(req.params.category){
     const category = await categoryService.getCategoryByName(req.params.category);
     if(category){
@@ -50,7 +50,7 @@ const category = async (req, res) => {
 };
 
 const product = async (req, res) => {
-  const user = userCheck(req, res);
+  const user = await userCheck(req.session.userId);
   const categories = await categoryService.getCategories();
   const product = await productService.getProductById(req.params.product);
   const category = await categoryService.getCategoryByName(req.params.category);

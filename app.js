@@ -50,6 +50,7 @@ app.use(express.json());
 app.use("/login", require("./routes/login"));
 app.use("/logout", require("./routes/logout"));
 app.use("/admin", require("./routes/admin"));
+app.use("/user", require("./routes/user"));
 app.use("/", shopRouter);
 //app.use("/routeName", require("./routes/routeName"));
 

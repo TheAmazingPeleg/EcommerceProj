@@ -102,7 +102,11 @@ const handleLogin = () => {
       success: function (data, textStatus, jqXHR) {
         if (jqXHR.status == 200) {
           const path = window.location.search.split("=")[1];
-          window.location.href = path;
+          if(path === undefined){
+            window.location.href = "/";
+          }else{
+            window.location.href = path;
+          }
         } else {
         }
       },
