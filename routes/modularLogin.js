@@ -4,6 +4,13 @@ const requireAdminLogin = (pathToRedirect = '/admin') => (req, res, next) => {
     }
     next();
 };
+
+const requireUserLogin = () => (req, res, next) => {
+    if (!req.session.userId) {
+        return res.redirect("/login");
+    }
+    next();
+};
   
 const redirectIfAuthenticated = (req, res, next) => {
     if (req.session.adminId) {
@@ -17,5 +24,6 @@ const redirectIfAuthenticated = (req, res, next) => {
   
 module.exports = {
     requireAdminLogin,
+    requireUserLogin,
     redirectIfAuthenticated,
 };

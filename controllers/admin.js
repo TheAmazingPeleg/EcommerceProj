@@ -1,6 +1,5 @@
 const adminService = require("../services/admin");
 
-
 const index = async (req, res) => {
     const admin = await adminService.getAdmin(req.session.adminId);
     res.render("../views/admin.ejs", { admin });
@@ -11,7 +10,7 @@ const createAdminsForm = (req, res) => {
 };
 
 const manageAdminsForm = (req, res) => {
-    res.render("../views/admin-forms/manage-admins-form.ejs");
+    res.render("../views/admin-forms/manage-admins-form.ejs", {});
 };
 
 const createAdmin = async (req, res) => {
