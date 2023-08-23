@@ -1,3 +1,4 @@
+let products = [], cart = [];
 $(document).ready(function(){
     // Initialize Tooltip
     $('[data-toggle="tooltip"]').tooltip(); 
@@ -26,7 +27,19 @@ $(document).ready(function(){
       } // End if
     });
   })
-  let products = [];
+  const renderError = ({ errors }) => {
+    const errorsElement = document.getElementById("errors-container");
+  
+    errorsElement.innerHTML = "";
+  
+    for (let i = 0; i < errors.length; i++) {
+      const errorElement = document.createElement("div");
+      errorElement.innerHTML = errors[i];
+      errorsElement.appendChild(errorElement);
+    }
+  
+    errorsElement.style.display = "block";
+};
     $.ajax({
       url: "/api/products/",
       method: "GET",
@@ -44,7 +57,7 @@ $(document).ready(function(){
     const searchButton = document.getElementById('searchButton');
     searchButton.className = "glyphicon glyphicon-remove";
     const searchElem = document.getElementById('searchElem');
-    if(click % 2){
+    if(!(click % 2)){
       const searchForm = document.createElement("form");
       const searchInput = document.createElement("input");
       searchInput.addEventListener('input', searchBar);
@@ -145,7 +158,7 @@ $(document).ready(function(){
         return;
     }
     // Get existing cart data from localStorage
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart = JSON.parse(localStorage.getItem('cart')) || [];
 
     // Create a new item object
     let newItem = {
@@ -175,8 +188,6 @@ $(document).ready(function(){
     alert(newItem.name + 'added to the cart!');
     initCart();
 }
-
-let cart = [];
 const cartAmount = document.getElementById('cartAmount');
 const productsInCart = document.getElementById('productsInCart'); 
 const fullCart = document.getElementById('fullCart'); 
@@ -193,8 +204,13 @@ const removeFromCart = (id, size, color) => {
 const goToCart = () => {
     window.location.pathname = "/cart";
 }
+const moveToLogin = () => {
+  window.location.pathname = "/login";
+}
 const initCart = () => {
     navBarCart.innerHTML = '';
+    if(fullCart)
+      fullCart.innerHTML = '';
     if(localStorage.getItem('cart') == 'undefined'){
         localStorage.removeItem('cart');
     }
@@ -260,3 +276,50 @@ const cartEmpty = () => {
     }
 }
 initCart();
+
+const placeOrder = () => {
+  const address = $("#address").val();
+  const city = $("#city").val();
+  const country = $("#country").val();
+  const zip = $("#zip").val();
+  const finalCart = cart;
+  console.log(finalCart);
+  const clientSideValidationErrors = [];
+  if(address.length < 3){
+    clientSideValidationErrors.push(`Invallid address!`);
+  }if(city.length < 2){
+    clientSideValidationErrors.push(`Invallid city!`);
+  }if(country.length < 2){
+    clientSideValidationErrors.push(`Invallid country!`);
+  }if(zip.length !== 5 && zip.length !== 7 && Number(zip) !== zip){
+    clientSideValidationErrors.push(`zip should be 5 or 7 digits number!`);
+  }if(finalCart.length === 0){
+    clientSideValidationErrors.push(`you'r cart is empty!`);
+  }
+  if (clientSideValidationErrors.length > 0) {
+    renderError({ errors: clientSideValidationErrors });
+  } else {
+    $.ajax({
+      url: "/cart",
+      method: "POST",
+      data: { address,
+        city,
+        country,
+        zip,
+        finalCart },
+      followRedirects: true,
+      xhrFields: { withCredentials: true },
+      success: function (data, textStatus, jqXHR) {
+        if (jqXHR.status == 200) {
+          localStorage.removeItem('cart');
+          initCart();
+          alert("Order Placed!");
+        } else {
+        }
+      },
+      error: function (error) {
+        renderError(error.responseJSON);
+      },
+    });
+  }
+}

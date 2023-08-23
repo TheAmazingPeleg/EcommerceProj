@@ -1,12 +1,13 @@
 const productService = require("../services/product.js");
 const categoryService = require("../services/category");
 const userService = require("../services/user");
+const orderService = require("../services/order");
 
 const userCheck = async (id) => {
   if(id !== undefined)
     return await userService.getUserById(id);
   return newItem = {
-    id: '',
+    _id: '',
     username: '',
     firstName: '',
     lastName: '',
@@ -181,6 +182,76 @@ const updateProduct = async (req, res) => {
   res.json(product);
 };
 
+const createOrder = async (req, res) => {
+  if(!req.session.userId)
+    return null;
+  const {
+    address,
+    city,
+    country,
+    zip,
+    finalCart
+  } = req.body;
+  let cart = finalCart;
+  const status = "waiting for approval";
+  const userId = req.session.userId;
+  if(address.length < 3){
+    return res.status(404).json({ errors: ['Invallid address!'] });
+  }if(city.length < 2){
+    return res.status(404).json({ errors: ['Invallid city!'] });
+  }if(country.length < 2){
+    return res.status(404).json({ errors: ['Invallid country!'] });
+  }if(zip.length !== 5 && zip.length !== 7 && Number(zip) !== zip){
+    return res.status(404).json({ errors: ['zip should be 5 or 7 digits number!'] });
+  }if(cart.length === 0){
+    return res.status(404).json({ errors: ['you\'r cart is empty!'] });
+  }
+  let clientSideValidationErrors = [];
+  const user = await userService.getUserById(userId);
+  const firstName = user.firstName;
+  const lastName = user.lastName;
+  let cost = 0;
+  for(let i = 0; i < cart.length; i ++){
+    let prod = await productService.getProductById(cart[i].id);
+    if(prod){
+      if(cart[i].name !== prod.name)
+        clientSideValidationErrors.push('The name ' + cart[i].name + ' is not match!');
+      else if(!prod.categories.includes(cart[i].category))
+        clientSideValidationErrors.push('The category ' + cart[i].category + ' is not match for' + cart[i].name);
+      else if(!prod.colors.includes(cart[i].color))
+        clientSideValidationErrors.push('The color you chose for ' + cart[i].name + ' is not availble!');
+      else if(!prod.sizes.includes(cart[i].size))
+        clientSideValidationErrors.push('The size you chose for ' + cart[i].name + ' is not availble!');
+      else if(prod.amount > prod.amount)
+        clientSideValidationErrors.push('The amount you requested for ' + cart[i].name + ' is not availble!');
+      else
+        cost += cart[i].amount * prod.price;
+    }else
+      clientSideValidationErrors.push('The product ' + cart[i].name + ' is not availble!');
+  }
+  if(clientSideValidationErrors.length){
+    return res.status(404).json(JSON.stringify(clientSideValidationErrors));
+  }else{
+    cart = JSON.stringify(finalCart);
+    const newOrder = await orderService.createOrder(
+      userId,
+      firstName,
+      lastName,
+      address,
+      city,
+      country,
+      zip,
+      cart,
+      status,
+      cost);
+    if(newOrder){
+      return res.status(200).json(newOrder);
+    }else{
+      return res.status(404).json(error);
+    }
+  }
+};
+
 module.exports = {
   index,
   cart,
@@ -193,5 +264,6 @@ module.exports = {
   deleteProduct,
   getProducts,
   getProductsByCategoryName,
-  updateProduct
+  updateProduct,
+  createOrder
 };

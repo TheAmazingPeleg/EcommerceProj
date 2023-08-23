@@ -15,7 +15,7 @@ const renderError = ({ errors }) => {
 const changePassword = () => {
   window.location.href = "/user/password";
 }
-  
+
 const handleUpdateUser = () => {
     const firstName = $("#firstName").val();
     const lastName = $("#lastName").val();
@@ -51,4 +51,33 @@ const handleUpdateUser = () => {
         },
       });
     }
+};
+
+const handleChangePassword = () => {
+  const oldPassword = $("#oldPassword").val();
+  const password = $("#password").val();
+  const clientSideValidationErrors = [];
+  if(password.length < 6){
+    clientSideValidationErrors.push(`The password must contain atleast 6 letters`);
+  }
+  if (clientSideValidationErrors.length > 0) {
+    renderError({ errors: clientSideValidationErrors });
+  } else {
+    $.ajax({
+      url: "/user/password",
+      method: "POST",
+      data: { oldPassword, password },
+      followRedirects: true,
+      xhrFields: { withCredentials: true },
+      success: function (data, textStatus, jqXHR) {
+        if (jqXHR.status == 200) {
+          alert("Password Changed!");
+        } else {
+        }
+      },
+      error: function (error) {
+        renderError(error.responseJSON);
+      },
+    });
+  }
 };

@@ -71,6 +71,14 @@
             <ul class="list-group mb-3 sticky-top" id="fullCart">
             </ul>
         </div>
+      <% if(user._id === '') { %>
+        <div class="col-md-8 order-md-1" style="text-align: center;">
+          <h1>Oops...</h1>
+          <em>You must to login to procced the order! <br /> Don't Worry! you'r items in the cart will be saved.</em>
+          <hr class="md-4"/>
+          <div class="btn btn-primary btn-lg btn-block" onclick="moveToLogin()">Login</div>
+        </div>
+      <% }else{ %>
         <div class="col-md-8 order-md-1">
             <h4 class="mb-3">Billing address</h4>
             <form class="needs-validation" novalidate="">
@@ -113,9 +121,11 @@
                     </div>
                 </div>
                 <hr class="mb-4">
-                <button class="btn btn-primary btn-lg btn-block" type="submit">Place an Order!</button>
+                <div class="btn btn-primary btn-lg btn-block" onclick="placeOrder()">Place an Order!</div>
             </form>
         </div>
+      <% } %>
+      <div id="errors-container"></div>
   </div>
 </div>
 <!-- Footer -->

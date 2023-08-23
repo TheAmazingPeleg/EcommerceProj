@@ -11,13 +11,14 @@ const {
   getProducts,
   updateProduct,
   createCategory,
-  getCategories
+  getCategories,
+  createOrder
 } = require("../controllers/shop");
 
 const router = express.Router();
 
 router.route("/").get(index);
-router.route("/cart").get(cart);
+router.route("/cart").get(cart).post(createOrder);
 router.route("/api/products").get(getProducts).post(createProduct);
 router.route("/api/categories").get(getCategories).post(createCategory);
 router.route("/:category").get(category);

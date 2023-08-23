@@ -63,67 +63,69 @@
     </div>
   </nav>
 <!-- Container -->
-<div class="container">
+<div class="container text-center">
   <div class="row">
+    <% if(orders){ %>
       <div class="col-md-12 order-md-1">
-        <h4 class="mb-3">Personal Information</h4>
-          <form>
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="username">Username</label>
-                <input type="text" class="form-control" value="<%= user.username %>" readonly />
-              </div>
-              <div class="col-md-6 mb-3">
-                <label>Password</label>
-                <div class="btn btn-primary" onclick="changePassword()">Change Password</div>
-              </div>
+        <h4 class="mb-3">My Orders</h4>
+        <% for(let i = 0; i < orders.length; i ++){ %>
+          <hr class="mb-4">
+          <div class="col-sm-12">
+            <em><b>Status:</b> <%= orders[i].status %></label>
+          </div>
+          <br><br><br>
+          <h3>Billing:</h3>
+          <div class="row">
+            <div class="col-sm-6">
+                <em><b>First name:</b> <%= orders[i].firstName %></label>
             </div>
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="firstName">First name</label>
-                <input type="text" class="form-control" id="firstName" name="firstName" value="<%= user.firstName %>" required/>
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="lastName">Last name</label>
-                <input type="text" class="form-control" id="lastName" name="lastName" value="<%= user.lastName %>" required/>
-              </div>
+            <div class="col-sm-6">
+                <em><b>Last name:</b> <%= orders[i].firstName %></label>
             </div>
-            <div class="mb-3">
-            <label for="email">Email</label>
-                <input type="email" class="form-control" value="<%= user.email %>" readonly />
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+                <em><b>Address:</b> <%= orders[i].address %></label>
             </div>
-            <hr class="mb-4">
-            <h4 class="mb-3">Billing address</h4>
-            <div class="mb-3">
-              <label for="address">Address</label>
-              <input type="text" class="form-control" id="address" name="address" value="<%= user.address %>">
+            <div class="col-sm-3">
+                <em><b>City:</b> <%= orders[i].city %></label>
             </div>
-            <div class="row" style="margin-top: 10px;">
-                <div class="col-md-5 mb-3">
-                  <div style="display: flex">
-                      <label for="city" style="margin-right: 4px;">City</label>
-                      <input type="text" class="form-control" id="city" name="city" value="<%= user.city %>">
-                  </div>
-                </div>
-              <div class="col-md-4 mb-3">
-                <div style="display: flex">
-                  <label for="country" style="margin-right: 4px;">Country</label>
-                  <input type="text" class="form-control" id="country" name="country" value="<%= user.country %>">
-                </div>
-              </div>
-              <div class="col-md-3 mb-3">
-                <div style="display: flex">
-                  <label for="zip" style="margin-right: 4px;">Zip</label>
-                  <input type="text" class="form-control" id="zip" name="zip" value="<%= user.zip %>">
-                </div>
-              </div>
+            <div class="col-sm-3">
+                <em><b>Country:</b> <%= orders[i].country %></label>
             </div>
-            <hr class="mb-4">
-            <div class="btn btn-primary btn-lg btn-block" onclick="handleUpdateUser()">Update User</div>
-          </form>
+            <div class="col-sm-2">
+                <em><b>Zip:</b> <%= orders[i].zip %></label>
+            </div>
+          </div>
+          <br />
+          <h3>Products:</h3>
+          <%
+            let cart = JSON.parse(orders[i].cart);
+            for(let j = 0; j < cart.length; j ++){
+          %>
+            <div style="display: flex; justify-content: center;">
+              <img src="<%= cart[j].image %>" height="30px" width="30px"/>
+              <em style="margin: 0px 10px"><%= cart[j].name %></em>
+              <p style="border: 1px solid black; border-radius: 10px; margin-top: 10px; width: 10px; height: 10px;" id="c<%=j%>"></p>
+              <p style="margin: 0px 10px;">'<%= cart[j].size %>' - <%= cart[j].amount %></p>
+              <span>&#8362;<%=(cart[j].price * cart[j].amount) %><span>
+            </div>
+            <script>
+              document.getElementById('c<%=j%>').style.backgroundColor = "#<%= cart[j].color %>";
+            </script>
+          <%
+            }
+          %>
+          <em><b>Total Cost: &#8362;<%= orders[i].cost %></b></em>
+      <% } %>
       </div>
+    <% } else { %>
+      <div class="col-md-12 order-md-1">
+        <h4 class="mb-3">My Orders</h4>
+        <em>There are no orders yet...</em>
+      </div>
+    <% } %>
   </div>
-  <div id="errors-container"></div>
 </div>
 <!-- Footer -->
 <footer class="text-center">
