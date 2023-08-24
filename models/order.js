@@ -4,52 +4,53 @@ const Schema = mongoose.Schema;
 const Order = new Schema({
     userId: {
         type: String,
-        isRequired: true
+        required: true
     },
     firstName: {
         type: String,
-        isRequired: true
+        required: true
     },
     lastName: {
         type: String,
-        isRequired: true
+        required: true
     },
     address: {
         type: String,
-        isRequired: true
+        required: true
     },
     country: {
         type: String,
-        isRequired: true
+        required: true
     },
     city: {
         type: String,
-        isRequired: true
+        required: true
     },
     zip: {
         type: String,
-        isRequired: true
+        required: true
     },
     date: {
-        type: Number,
+        type: Date,
         default: Date.now,
-        isRequired: true
+        required: true
     },
     cart: {
         type: String,
-        isRequired: true
+        required: true
     },
     deliveryDate: {
-        type: Number,
-        isRequired: false
+        type: Date,
+        required: false
     },
     status: {
         type: String,
-        isRequired: true
+        required: true
     },
     cost: {
         type: Number,
-        isRequired: true
+        required: true
     }
 });
+
 module.exports = mongoose.model('Order', Order, "orders");
