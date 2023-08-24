@@ -1,9 +1,136 @@
 let products = [];
 let categories = [];
 let admins = [];
-//1. go to https://developers.facebook.com/tools/explorer/?method=GET&path=oauth%2Faccess_token%3Fgrant_type%3Dfb_exchange_token%26client_id%3D123253290617731%26client_secret%3D8f4b1cb26e881c3dd9578002783687f6%26fb_exchange_token%3DEAABwGSSay4MBABFiSdyqlAOGQdri2fsZByIBhIbZBBKENKWGp4MjJRA7ZBZAqnZCbVietRHfgl0rnQszhUgOMC1V9AvZBBtjA9UfF1JJT3SNaFT3RQZBXfo6NJxTgyqUV9B7ZAt7x0tGQHlj7S16Biv7fSI6sjqCO2N8DYBTIavHqUXkyx5UrMTnDYAsU3im765LG6BbURcLaj5zlgdtGSWNwhlMp6JH4goZD&version=v16.0
-//2. generate another
-//const facebookToken = "EAABwGSSay4MBAMXWAjmplKNcTy6sBqIQVwIG2GsjZAShewrCsPFNTZBLjfyGegNdY5MQYe3bPvuo4lgWzPp8hEwdHFCmhZBSxVshQYKr8oAMYWAoMHwbJTBd1dEpooVZCGZCNEABpfWr8Dk4rXBgmamOtqs3pDZAg5RD391tKSIG4K83q0JYOvblUNDp1LJ8pboHfSNNnTWwZDZD";
+
+function deleteAdmin(id) {
+    $.ajax({
+        url: "/admin/manageAdminsForm",
+        method: "DELETE",
+        data: { id },
+        followRedirects: true,
+        xhrFields: { withCredentials: true },
+        success: function (data, textStatus, jqXHR) {
+          if (jqXHR.status == 201) {
+            alert("Admin Removed!");
+          } else {
+          }
+        },
+        error: function () {
+          alert("You don't habe permissions to delete this Admin");
+        },
+    });
+}
+
+const handleChangeAdminPassword = (id) => {
+    const password = $("#" + id + "password").val();
+    $.ajax({
+        url: "/admin/manageAdminsForm",
+        method: "POST",
+        data: { id, password },
+        followRedirects: true,
+        xhrFields: { withCredentials: true },
+        success: function (data, textStatus, jqXHR) {
+          if (jqXHR.status == 200) {
+            alert("Password Changed!");
+          } else {
+          }
+        },
+        error: function () {
+            alert("You don't habe permissions to change this Admin's password");
+        },
+    });
+};
+
+const createAdmin = () => {
+    const username = $("#username").val();
+    const image = $("#image").val();
+    const password = $("#password").val();
+    $.ajax({
+        url: "/admin/createAdminForm",
+        method: "POST",
+        data: { username, image, password },
+        followRedirects: true,
+        xhrFields: { withCredentials: true },
+        success: function (data, textStatus, jqXHR) {
+          if (jqXHR.status == 201) {
+            alert("Admin Created!");
+          } else {
+          }
+        },
+        error: function () {
+          alert("The Admin is already exists!");
+        },
+    });
+};
+
+const updateUser = (id) => {
+    const username = $("#"+ id +"username").val();
+    const email = $("#"+ id +"email").val();
+    const firstName = $("#"+ id +"firstName").val();
+    const lastName = $("#"+ id +"lastName").val();
+    const address = $("#"+ id +"address").val();
+    const city = $("#"+ id +"city").val();
+    const country = $("#"+ id +"country").val();
+    const zip = $("#"+ id +"zip").val();
+  
+    $.ajax({
+        url: "/admin/manageUsersForm",
+        method: "POST",
+        data: { id, username, email, firstName, lastName, address, city, country, zip },
+        followRedirects: true,
+        xhrFields: { withCredentials: true },
+        success: function (data, textStatus, jqXHR) {
+          if (jqXHR.status == 200) {
+            alert("User updated!");
+          } else {
+          }
+        },
+        error: function () {
+            alert("User didn't updated!");
+        },
+    });
+};
+
+const handleChangeUserPassword = (id) => {
+    const password = $("#" + id + "password").val();
+    $.ajax({
+        url: "/admin/manageUsersForm",
+        method: "PUT",
+        data: { id, password },
+        followRedirects: true,
+        xhrFields: { withCredentials: true },
+        success: function (data, textStatus, jqXHR) {
+          if (jqXHR.status == 200) {
+            alert("Password Changed!");
+          } else {
+          }
+        },
+        error: function () {
+            alert("User didn't updated!");
+        },
+    });
+};
+
+function deleteUser(id) {
+    $.ajax({
+        url: "/admin/manageUsersForm",
+        method: "DELETE",
+        data: { id },
+        followRedirects: true,
+        xhrFields: { withCredentials: true },
+        success: function (data, textStatus, jqXHR) {
+          if (jqXHR.status == 201) {
+            alert("User Removed!");
+          } else {
+          }
+        },
+        error: function () {
+          alert("You can't delete this user!");
+        },
+    });
+}
+
+
 
 function createProduct() {
     const name = document.getElementById('name').value;
@@ -66,6 +193,7 @@ function createProduct() {
     });
 }
 
+/*
 function updateProducts() {
     $.ajax({
         url: `api/products`,
@@ -93,7 +221,7 @@ function updateCategories() {
         },
     });
 }
-
+*/
 function updateAdmins() {
     $.ajax({
         url: `admin/api`,
@@ -121,46 +249,6 @@ function loadPanel(panelUrl) {
             console.log("AJAX request failed: " + error);
         },
     });
-}
-
-function initNavBarElements() {
-    const sideBar = document.getElementById('sideBar');
-    const sideBarElements = sideBar.getElementsByTagName("a")
-    for (let i = 0; i < sideBarElements.length; i++) {
-        sideBarElements[i].classList = ["unselected-nav"];
-    }
-}
-
-function loadPanelElements(panelUrl) {
-    initNavBarElements();
-    let adminPanel;
-
-    if (panelUrl === 'admin/createProductForm') {
-        adminPanel = document.getElementById('createProductForm');
-        loadCreateProductForm();
-    }
-    else if (panelUrl === 'admin/manageProductsForm') {
-        adminPanel = document.getElementById('manageProductsForm');
-        loadProductsTable();
-    }
-    else if (panelUrl === 'admin/createCategoryForm') {
-        adminPanel = document.getElementById('createCategoryForm');
-        loadCreateCategoryForm();
-    }
-    else if (panelUrl === 'admin/manageCategoriesForm') {
-        adminPanel = document.getElementById('manageCategoriesForm');
-        loadCategoriesTable();
-    }
-    else if (panelUrl === 'admin/createAdminForm') {
-        adminPanel = document.getElementById('createAdminFormLink');
-        loadCreateAdminForm();
-    }
-    else if (panelUrl === 'admin/manageAdminsForm') {
-        adminPanel = document.getElementById('manageAdminsFormLink');
-        loadAdminsTable();
-    }
-
-    adminPanel.classList = ["selected-nav"];
 }
 
 function loadUnchangeableProductRow(product) {

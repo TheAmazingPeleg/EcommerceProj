@@ -73,3 +73,34 @@ nav ul {
 .left-item {
     float: left;
 }
+#admin-panel {
+    padding-right: 30px;
+}
+.graph{
+    border: 1px solid #EF4281;
+    padding: 10px;
+}
+.statInfo {
+    background: #BDEEE7;
+    border-radius: 40px;
+    transition: 0.2s;
+    color: gray;
+    margin: 10px;
+    border: 1px solid #EF4281;
+}
+.statInfo p {
+    font-size: 2em;
+    color: #EF4281;
+}
+.statInfo h2 {
+    font-size: 1.4em;
+}
+.statInfo:hover {
+    background: rgb(205, 249, 242);
+    color: black;
+    border: 1px solid black;
+
+}
+.bar {
+   fill: #EF4281;
+}

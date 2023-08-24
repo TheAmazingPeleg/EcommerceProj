@@ -4,20 +4,33 @@ const {
     index,
     createAdminsForm,
     manageAdminsForm,
+    createAdmin,
+    deleteAdmin,
+    updateAdmin,
+    manageUsersForm,
+    deleteUser,
+    updateUser,
+    changeUserPassword
 } = require("../controllers/admin");
 
 const { requireAdminLogin } = require("./modularLogin");
-const { createAdmin, getAdmins, deleteAdmin } = require("../controllers/admin");
 
 const router = express.Router();
 
 router.get("/", requireAdminLogin('/admin'), index);
 
-router.get("/createAdminForm", requireAdminLogin('/admin'), createAdminsForm);
-router.get("/manageAdminsForm", requireAdminLogin('/admin'), manageAdminsForm);
+router.route("/createAdminForm")
+    .get(requireAdminLogin('/admin'), createAdminsForm)
+    .post(createAdmin);
+router.route("/manageAdminsForm")
+    .get(requireAdminLogin('/admin'), manageAdminsForm)
+    .post(updateAdmin)
+    .delete(deleteAdmin);
+    router.route("/manageUsersForm")
+    .get(requireAdminLogin('/admin'), manageUsersForm)
+    .post(updateUser)
+    .put(changeUserPassword)
+    .delete(deleteUser);
 
-router.route("/api").post(createAdmin).get(getAdmins);
-
-router.route("/api/:id").delete(deleteAdmin);
 
 module.exports = router;
