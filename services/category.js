@@ -3,13 +3,13 @@ const Category = require("../models/category");
 
 const createCategory = async (
   name,
-  slogan,
-  image
+  image,
+  slogan
 ) => {
-  const category = new Product({
+  const category = new Category({
     name,
-    slogan,
-    image
+    image,
+    slogan
   });
 
   return await category.save();

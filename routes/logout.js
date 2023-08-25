@@ -8,7 +8,7 @@ const logout = async (req, res) => {
 
 const router = express.Router();
 
-router.get("/", logout);
+router.get("*", logout);
 
 
 module.exports = router;
