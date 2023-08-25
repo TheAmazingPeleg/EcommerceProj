@@ -44,7 +44,10 @@ const deleteAdmin = async (id) => {
 const initFirstAdmin = async() => {
     const adminsList = await getAdmins();
     if(adminsList.length === 0){
-        const admin = createAdmin({ username: "admin", password: "123", image: "../assets/images/userIcon.png"});
+        const username = "admin";
+        const image ="../assets/images/userIcon.png";
+        const password = "123";
+        createAdmin(username, image, password);
     }
 }
 initFirstAdmin();

@@ -24,14 +24,14 @@ const index = async (req, res) => {
     const products = await productService.getProducts();
     const categories = await categoryService.getCategories();
     const user = await userCheck(req.session.userId);
-    res.render("../views/profile.ejs", { products, categories, user });
+    res.render("../views/profile.ejs", { products, categories, user, sessionId: req.session.userId });
 };
 
 const changePasswordForm = async (req, res) => {
     const products = await productService.getProducts();
     const categories = await categoryService.getCategories();
     const user = await userCheck(req.session.userId);
-    res.render("../views/password.ejs", { products, categories, user });
+    res.render("../views/password.ejs", { products, categories, user, sessionId: req.session.userId });
 };
 
 const changePassword = async (req, res) => {
@@ -56,7 +56,7 @@ const getOrders = async (req, res) => {
     const orders = await orderService.getOrdersByUserId(req.session.userId);
     const categories = await categoryService.getCategories();
     const user = await userCheck(req.session.userId);
-    res.render("../views/myOrders.ejs", { orders, categories, user });
+    res.render("../views/myOrders.ejs", { orders, categories, user, sessionId: req.session.userId });
 };
 
 const updateUser = async (req, res) => {

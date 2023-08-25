@@ -1,23 +1,18 @@
 const mongoose = require("mongoose");
 const Product = require("../models/product");
 
-const createProduct = async (
-  name,
-  description,
-  categories,
-  images,
-  priceBeforeDiscout,
-  price,
-  ...props
-) => {
+const createProduct = async (name, description, categories, images, priceBeforeDiscount, price, amount, sizes, colors, sex) => {
   const product = new Product({
     name,
     description,
     categories,
     images,
-    priceBeforeDiscout,
+    priceBeforeDiscount,
     price,
-    ...props
+    amount,
+    sizes,
+    colors,
+    sex
   });
 
   return await product.save();

@@ -24,10 +24,27 @@ const createAdminsForm = async (req, res) => {
     res.render("../views/admin-forms/create-admin-form.ejs", { admin });
 };
 
+const createProductForm = async (req, res) => {
+    const admin = await adminService.getAdmin(req.session.adminId);
+    const categories = await categoryService.getCategories();
+    res.render("../views/admin-forms/create-product-form.ejs", { admin, categories });
+};
+
+const createCategoryForm = async (req, res) => {
+    const admin = await adminService.getAdmin(req.session.adminId);
+    res.render("../views/admin-forms/create-category-form.ejs", { admin });
+};
+
 const manageAdminsForm = async (req, res) => {
     const admin = await adminService.getAdmin(req.session.adminId);
     const admins = await adminService.getAdmins();
     res.render("../views/admin-forms/manage-admins-form.ejs", { admin, admins });
+};
+
+const manageProductsForm = async (req, res) => {
+    const admin = await adminService.getAdmin(req.session.adminId);
+    const products = await productService.getProducts();
+    res.render("../views/admin-forms/manage-products-form.ejs", { admin, products });
 };
 
 const manageUsersForm = async (req, res) => {
@@ -36,11 +53,57 @@ const manageUsersForm = async (req, res) => {
     res.render("../views/admin-forms/manage-users-form.ejs", { admin, users });
 };
 
+const manageCategoriesForm = async (req, res) => {
+    const admin = await adminService.getAdmin(req.session.adminId);
+    const categories = await categoryService.getCategories();
+    res.render("../views/admin-forms/manage-categories-form.ejs", { admin, categories });
+};
+
+const manageOrdersForm = async (req, res) => {
+    const admin = await adminService.getAdmin(req.session.adminId);
+    const orders = await orderService.getOrders();
+    res.render("../views/admin-forms/manage-orders-form.ejs", { admin, orders });
+};
+
+const viewOrder = async (req, res) => {
+    const admin = await adminService.getAdmin(req.session.adminId);
+    const order = await orderService.getOrderById(req.params.id);
+    const user = await userService.getUserById(order.userId);
+    res.render("../views/admin-forms/view-order-form.ejs", { admin, order, user });
+};
+
 const createAdmin = async (req, res) => {
-    console.log(req.body.username + " " + req.body.image + " " + req.body.password);
     try {
         const admin = await adminService.createAdmin(req.body.username, req.body.image, req.body.password);
         res.status(201).send(admin);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+};
+
+const createCategory = async (req, res) => {
+    try {
+        const category = await categoryService.createCategory(req.body.name, req.body.image, req.body.slogan);
+        res.status(201).send(category);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+};
+
+const createProduct = async (req, res) => {
+    try {
+        const name = req.body.name;
+        const description = req.body.description;
+        const categories = req.body.categories;
+        const images = req.body.images;
+        const priceBeforeDiscount = req.body.priceBeforeDiscount;
+        const price = req.body.price;
+        const amount = req.body.amount;
+        const sizes = req.body.sizes;
+        const colors = req.body.colors;
+        const sex = req.body.sex;
+        const product = await productService.createProduct(name, description, categories, images, priceBeforeDiscount, price, amount, sizes, colors, sex);
+        res.status(201).send(product);
     } catch (error) {
         res.status(400).send(error);
     }
@@ -60,6 +123,24 @@ const deleteAdmin = async (req, res) => {
                 res.status(201).send(admin);
             }
         }
+    } catch (error) {
+        res.status(400).send(error);
+    }
+};
+
+const deleteProduct = async (req, res) => {
+    try {
+        const admin = await productService.deleteProduct(req.body.id);
+        res.status(201).send(admin);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+};
+
+const deleteCategory = async (req, res) => {
+    try {
+        const admin = await categoryService.deleteCategory(req.body.id);
+        res.status(201).send(admin);
     } catch (error) {
         res.status(400).send(error);
     }
@@ -133,6 +214,16 @@ const changeUserPassword = async (req, res) => {
     }
 }
 
+const updateOrder = async (req, res) => {
+    try {
+        const status = req.body.status;
+        const order = await orderService.updateOrder(req.body.id, { status });
+        res.status(200).send(order);
+    } catch (error) {
+        res.status(400).send("Cannot update This Order!");
+    }
+}
+
 module.exports = {
     index,
     createAdminsForm,
@@ -145,5 +236,16 @@ module.exports = {
     updateUser,
     deleteUser,
     changeUserPassword,
-    manageUsersForm
+    manageUsersForm,
+    createProductForm,
+    createProduct,
+    deleteProduct,
+    deleteCategory,
+    manageProductsForm,
+    createCategory,
+    createCategoryForm,
+    manageCategoriesForm,
+    manageOrdersForm,
+    updateOrder,
+    viewOrder
 };
