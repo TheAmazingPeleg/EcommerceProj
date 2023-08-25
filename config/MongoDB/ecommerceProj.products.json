@@ -1,0 +1,257 @@
+[{
+  "_id": {
+    "$oid": "64e90b2cc53070bb10865654"
+  },
+  "name": "RAY-BAN",
+  "description": "The Ray-Ban Aviator is a model that transcends gender and boasts timeless appeal. It offers a classic aviator design combined with unparalleled quality, performance, and comfort.",
+  "categories": [
+    "Men"
+  ],
+  "images": [
+    "/assets/images/products/ray-ban1.avif",
+    "/assets/images/products/ray-ban2.avif",
+    "/assets/images/products/ray-ban3.avif",
+    "/assets/images/products/ray-ban4.avif",
+    "/assets/images/products/ray-ban5.avif"
+  ],
+  "priceBeforeDiscount": 1250,
+  "price": 1120,
+  "amount": 56,
+  "sizes": [
+    "S",
+    "M",
+    "L"
+  ],
+  "colors": [
+    "000000",
+    "D1B47A"
+  ],
+  "sex": [
+    "Male"
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e90b9ac53070bb10865659"
+  },
+  "name": "OAKLEY",
+  "description": "Devoted to making the best sunglasses on the planet by letting invention lead the way. With a passion to reinvent from scratch, Oakley sunglasses defy convention and set the standard for design, performance, and protection by wrapping innovation in art.",
+  "categories": [
+    "Men"
+  ],
+  "images": [
+    "/assets/images/products/oakley1.avif",
+    "/assets/images/products/oakley2.avif",
+    "/assets/images/products/oakley3.avif",
+    "/assets/images/products/oakley4.avif",
+    "/assets/images/products/oakley5.avif"
+  ],
+  "priceBeforeDiscount": 670,
+  "price": 630,
+  "amount": 14,
+  "sizes": [
+    "S",
+    "M",
+    "L"
+  ],
+  "colors": [
+    "000000"
+  ],
+  "sex": [
+    "Male"
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e90bf0c53070bb1086565b"
+  },
+  "name": "COSTA",
+  "description": "Wrapping style lines. Edgy curved temples. This oversized sunglass reflects the classic right point break it was named after. Find yours now in a unique colorway, available only at Sunglass Hut.",
+  "categories": [
+    "Men"
+  ],
+  "images": [
+    "/assets/images/products/consta1.avif",
+    "/assets/images/products/consta2.avif",
+    "/assets/images/products/consta3.avif",
+    "/assets/images/products/consta4.avif",
+    "/assets/images/products/consta5.avif"
+  ],
+  "priceBeforeDiscount": 760,
+  "price": 720,
+  "amount": 140,
+  "sizes": [
+    "S",
+    "M",
+    "L"
+  ],
+  "colors": [
+    "2E2F4E"
+  ],
+  "sex": [
+    "Male"
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e90c48c53070bb10865660"
+  },
+  "name": "DOLCE&GABBANA",
+  "description": "A pilot shape is a must-have in everyone's wardrobe that will take you beyond the seasons. Do it your way with a standout silver metal and patterned gradient lens combination that shows off your curated yet easy going approach to style.",
+  "categories": [
+    "Men"
+  ],
+  "images": [
+    "/assets/images/products/d&g1.avif",
+    "/assets/images/products/d&g2.avif",
+    "/assets/images/products/d&g3.avif",
+    "/assets/images/products/d&g4.avif",
+    "/assets/images/products/d&g5.avif"
+  ],
+  "priceBeforeDiscount": 1460,
+  "price": 1280,
+  "amount": 46,
+  "sizes": [
+    "S",
+    "M",
+    "L"
+  ],
+  "colors": [
+    "A8A8A6"
+  ],
+  "sex": [
+    "Male"
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e90c9ec53070bb10865662"
+  },
+  "name": "VERSACE",
+  "description": "Versace is distinguished by its strength of character, innovative use of new, unexpected materials, and varying style of inspiration and performance. The Versace sunglass collection is an elegantly designed line of distinctive eyewear available in unisex designs for those who choose to express their strength, confidence, and uniqueness through a bold and distinctive personal style.",
+  "categories": [
+    "Men"
+  ],
+  "images": [
+    "/assets/images/products/versace1.avif",
+    "/assets/images/products/versace2.avif",
+    "/assets/images/products/versace3.avif",
+    "/assets/images/products/versace4.avif",
+    "/assets/images/products/versace5.avif"
+  ],
+  "priceBeforeDiscount": 1120,
+  "price": 1050,
+  "amount": 24,
+  "sizes": [
+    "S",
+    "M",
+    "L"
+  ],
+  "colors": [
+    "C4A973"
+  ],
+  "sex": [
+    "Male"
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e920e6a84b941c8c818553"
+  },
+  "name": "Prada",
+  "description": "Stand out or stay in this summer with these Prada shades only available at Sunglass Hut. A faceted execution matches their oversize front frame, whilst the temples recall the brand’s iconic triangle shape. Style them as the finishing touch to a statement look and get ready to accept some compliments.",
+  "categories": [
+    "Women"
+  ],
+  "images": [
+    "/assets/images/products/prada1.avif",
+    "/assets/images/products/prada2.avif",
+    "/assets/images/products/prada3.avif",
+    "/assets/images/products/prada4.avif",
+    "/assets/images/products/prada5.avif"
+  ],
+  "priceBeforeDiscount": 1670,
+  "price": 1600,
+  "amount": 42,
+  "sizes": [
+    "S",
+    "M",
+    "L"
+  ],
+  "colors": [
+    "000000"
+  ],
+  "sex": [
+    "Female"
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e92126a84b941c8c818555"
+  },
+  "name": "TIFFANY & CO.",
+  "description": "Inspired by the House’s iconic jewelry collection, this Tiffany T style features angular lenses and a sleek, beveled T at the temple for a modern look.",
+  "categories": [
+    "Women"
+  ],
+  "images": [
+    "/assets/images/products/tiffany1.avif",
+    "/assets/images/products/tiffany2.avif",
+    "/assets/images/products/tiffany3.avif",
+    "/assets/images/products/tiffany4.avif",
+    "/assets/images/products/tiffany5.avif"
+  ],
+  "priceBeforeDiscount": 1390,
+  "price": 1310,
+  "amount": 16,
+  "sizes": [
+    "S",
+    "M",
+    "L"
+  ],
+  "colors": [
+    "000000"
+  ],
+  "sex": [
+    "Female"
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e92181a84b941c8c818557"
+  },
+  "name": "MICHAEL KORS",
+  "description": "These irregular shaped shades with warm sunset lens, and Havana metal frame are a must-have for her glam getaways. ",
+  "categories": [
+    "Women"
+  ],
+  "images": [
+    "/assets/images/products/michaelkors1.avif",
+    "/assets/images/products/michaelkors2.avif",
+    "/assets/images/products/michaelkors3.avif",
+    "/assets/images/products/michaelkors4.avif",
+    "/assets/images/products/michaelkors5.avif"
+  ],
+  "priceBeforeDiscount": 510,
+  "price": 450,
+  "amount": 140,
+  "sizes": [
+    "S",
+    "M",
+    "L"
+  ],
+  "colors": [
+    "EBCFBE"
+  ],
+  "sex": [
+    "Female"
+  ],
+  "__v": 0
+}]
