@@ -1,29 +1,87 @@
-<h1>Create Admin</h1>
-<div class="form-horizontal">
-  <div class="form-group">
-    <div class="col-sm-10">
-      <label class="control-label col-sm-1" for="text">Username</label>
-      <input
-        type="text"
-        class="form-control"
-        id="username-field"
-        placeholder="Username"
-      />
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href="../assets/images/favicon.ico">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Admin</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/admin.css">
+</head>
+
+<body>
+    <div class="container" id="wrapper">
+        <div class="row">
+            <nav class="col-sm-2 sidebar" id="sideBar">
+                <span class="col-sm-12 text-center">Admin Panel</span>
+                <a class="col-sm-12 text-center listItem" href="/admin">Dashboard</a>
+                <a class="col-sm-12 text-center listItem" href="/admin/createAdminForm">Add Admin</a>
+                <a class="col-sm-12 text-center listItem" href="/admin/manageAdminsForm">Admins List</a>
+                <a class="col-sm-12 text-center listItem" href="/admin/manageUsersForm">Users List</a>
+                <a class="col-sm-12 text-center listItem" href="/admin/createProductForm">Add Product</a>
+                <a class="col-sm-12 text-center listItem" href="/admin/manageProductsForm">Products List</a>
+                <a class="col-sm-12 text-center listItem" href="/admin/createCategoryForm">Add Category</a>
+                <a class="col-sm-12 text-center listItem" href="/admin/manageCategoriesForm">Categories List</a>
+                <a class="col-sm-12 text-center listItem" href="/admin/manageOrdersForm">Orders List</a>
+            </nav>
+            <div class="col-sm-10" id="content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                                    <ul class="navbar">
+                                        <li class="nav-item right-item">
+                                        <a class="nav-link" href="/admin">
+                                            <% if (admin) { %>
+                                                <img class="adminIcon" src="<%= admin.image %>">
+                                            <% } else { %>
+                                                <img class="adminIcon" src="../assets/images/userIcon.png">
+                                            <% } %>
+                                        </a>
+                                        </li>
+                                        <li class="nav-item right-item">
+                                            <p><%= admin.username %></p>
+                                        </li>
+                                        <li class="nav-item left-item">
+                                            <p class="actionItem" onclick="logoutRedirect()">Logout</p>
+                                        </li>
+                                    </ul>
+                            </nav>
+                            <div class="col-sm-12" id="admin-panel">
+                              <form class="form-container">
+                                <h1>Create an Admin</h1>
+                                <div class="form-field">
+                                  <label class="form-field-label">Username:</label>
+                                  <input type="text" id="username" class="form-input-field" name="username" /><br />
+                                </div>
+                                <div class="form-field">
+                                  <label class="form-field-label">Image Url:</label>
+                                  <input type="text" id="image" class="form-input-field" name="image" /><br />
+                                </div>
+                                <div class="form-field">
+                                  <label class="form-field-label">Password:</label>
+                                  <input type="password" id="password" class="form-input-field" name="password" /><br />
+                                </div>
+                                <div class="btn btn-primary" onclick="createAdmin()">Create Admin</div>
+                              </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-sm-10">
-      <label class="control-label col-sm-1" for="text">Password</label>
-      <input
-        type="text"
-        class="form-control"
-        id="password-field"
-        placeholder="password"
-      />
-    </div>
-    <div class="col-sm-10">
-      <div class="control-label col-sm-1">
-        <button onclick="addAdmin()" class="btn btn-default">Send</button>
-        <div class="statusOutput"></div>
-      </div>
-    </div>
-  </div>
-</div>
+    <script>
+        function logoutRedirect() {
+            window.location.pathname = "logout";
+        }
+    </script>
+    <script src="../../assets/js/admin.js"></script>
+</body>
+</html>

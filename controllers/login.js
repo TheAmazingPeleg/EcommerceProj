@@ -8,7 +8,7 @@ const index = (req, res) => {
 };
 const signup = (req, res) => {
     res.render("../views/register.ejs");
-  };
+};
 const register = async (req, res) => {
     const { username, password, email, firstName, lastName } = req.body;
     if(username.length < 2){

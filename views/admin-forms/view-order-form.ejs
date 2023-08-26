@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href="../assets/images/favicon.ico">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Admin</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/admin.css">
+</head>
+
+<body>
+    <div class="container" id="wrapper">
+        <div class="row">
+            <nav class="col-sm-2 sidebar" id="sideBar">
+                <span class="col-sm-12 text-center">Admin Panel</span>
+                <a class="col-sm-12 text-center listItem" href="/admin">Dashboard</a>
+                <a class="col-sm-12 text-center listItem" href="/admin/createAdminForm">Add Admin</a>
+                <a class="col-sm-12 text-center listItem" href="/admin/manageAdminsForm">Admins List</a>
+                <a class="col-sm-12 text-center listItem" href="/admin/manageUsersForm">Users List</a>
+                <a class="col-sm-12 text-center listItem" href="/admin/createProductForm">Add Product</a>
+                <a class="col-sm-12 text-center listItem" href="/admin/manageProductsForm">Products List</a>
+                <a class="col-sm-12 text-center listItem" href="/admin/createCategoryForm">Add Category</a>
+                <a class="col-sm-12 text-center listItem" href="/admin/manageCategoriesForm">Categories List</a>
+                <a class="col-sm-12 text-center listItem" href="/admin/manageOrdersForm">Orders List</a>
+            </nav>
+            <div class="col-sm-10" id="content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                                    <ul class="navbar">
+                                        <li class="nav-item right-item">
+                                        <a class="nav-link" href="/admin">
+                                            <% if (admin) { %>
+                                                <img class="adminIcon" src="<%= admin.image %>">
+                                            <% } else { %>
+                                                <img class="adminIcon" src="../assets/images/userIcon.png">
+                                            <% } %>
+                                        </a>
+                                        </li>
+                                        <li class="nav-item right-item">
+                                            <p><%= admin.username %></p>
+                                        </li>
+                                        <li class="nav-item left-item">
+                                            <p class="actionItem" onclick="logoutRedirect()">Logout</p>
+                                        </li>
+                                    </ul>
+                            </nav>
+                            <div class="col-sm-12" id="admin-panel">
+                                <div class="row text-center">
+                                <% if(order){ %>
+                                    <div class="col-md-12 order-md-1">
+                                    <h4 class="mb-3">Order Details:</h4>
+                                        <div class="col-sm-12">
+                                            <em><b>Status:</b> <%= order.status %></label>
+                                        </div>
+                                        <br />
+                                        <hr class="mb-4">
+                                        <h3>User's Details:</h3>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <em><b>id:</b> <%= user._id %></label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <em><b>Username:</b> <%= user.username %></label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <em><b>Email:</b> <%= user.email %></label>
+                                            </div>
+                                        </div>
+                                        <hr class="mb-4">
+                                        <h3>Billing:</h3>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <em><b>First name:</b> <%= order.firstName %></label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <em><b>Last name:</b> <%= order.firstName %></label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                        <div class="col-sm-4">
+                                            <em><b>Address:</b> <%= order.address %></label>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <em><b>City:</b> <%= order.city %></label>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <em><b>Country:</b> <%= order.country %></label>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <em><b>Zip:</b> <%= order.zip %></label>
+                                        </div>
+                                        </div>
+                                        <br />
+                                        <h3>Products:</h3>
+                                        <%
+                                        let cart = JSON.parse(order.cart);
+                                        for(let j = 0; j < cart.length; j ++){
+                                        %>
+                                        <div style="display: flex; justify-content: center;">
+                                            <img src="<%= cart[j].image %>" height="30px" width="30px"/>
+                                            <em style="margin: 0px 10px"><%= cart[j].name %></em>
+                                            <p style="border: 1px solid black; border-radius: 10px; margin-top: 10px; width: 10px; height: 10px;" id="c<%=j%>"></p>
+                                            <p style="margin: 0px 10px;">'<%= cart[j].size %>' - <%= cart[j].amount %></p>
+                                            <p>&#8362;<%=(cart[j].price * cart[j].amount) %><p>
+                                        </div>
+                                        <script>
+                                            document.getElementById('c<%=j%>').style.backgroundColor = "#<%= cart[j].color %>";
+                                        </script>
+                                        <%
+                                        }
+                                        %>
+                                        <em><b>Total Cost: &#8362;<%= order.cost %></b></em>
+                                        <hr class="mb-4">
+                                    </div>
+                                <% } else { %>
+                                    <div class="col-md-12 order-md-1">
+                                    <h4 class="mb-3">Unknown Order!</h4>
+                                    <em>Please try another order id!</em>
+                                    </div>
+                                <% } %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function logoutRedirect() {
+            window.location.pathname = "logout";
+        }
+    </script>
+    <script src="../../assets/js/admin.js"></script>
+</body>
+</html>

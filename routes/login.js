@@ -1,5 +1,6 @@
 const express = require("express");
 
+
 const {
     index,
     signup,
@@ -13,5 +14,6 @@ const router = express.Router();
 
 router.route("/").get(redirectIfAuthenticated, index).post(login);
 router.route("/newUser").get(redirectIfAuthenticated, signup).post(register);
+router.route("*").get(index);
 
 module.exports = router;

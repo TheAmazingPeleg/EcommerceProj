@@ -32,11 +32,48 @@ const deleteOrder = async (id) => {
     return order;
 }
 
+const aggregateLast5Weeks = async () => {
+    const pipeline = [
+        {
+            $project: {
+                week: { $isoWeek: "$date" },
+                orderAmount: "$cost"
+            }
+        },
+        {
+            $group: {
+                _id: "$week",
+                ordersAmount: { $sum: 1 }, // Count the number of orders per week
+                totalAmount: { $sum: "$orderAmount" }
+            }
+        },
+        {
+            $sort: { _id: -1 }
+        },
+        {
+            $limit: 5
+        }
+    ];
+
+    const result = await Order.aggregate(pipeline);
+    const weeks = [];
+    result.forEach(doc => {
+        const week = {
+            id: doc._id,
+            value: doc.ordersAmount,
+            region: "Week #"+ doc._id + " Total of " + doc.totalAmount + " Incomes"
+        }
+        weeks.push(week);
+    });
+    return weeks;
+}
+
 module.exports = {
     getOrderById,
     createOrder,
     getOrders,
     updateOrder,
     deleteOrder,
-    getOrdersByUserId
+    getOrdersByUserId,
+    aggregateLast5Weeks
 };

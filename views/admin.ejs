@@ -20,9 +20,15 @@
         <div class="row">
             <nav class="col-sm-2 sidebar" id="sideBar">
                 <span class="col-sm-12 text-center">Admin Panel</span>
-                <a class="col-sm-12 text-center listItem" href="admin">Dashboard</a>
-                <a class="col-sm-12 text-center listItem" href="admin/createAdminForm">Add Admin</a>
-                <a class="col-sm-12 text-center listItem" href="admin/manageAdminsForm">Admins List</a>
+                <a class="col-sm-12 text-center listItem" href="/admin">Dashboard</a>
+                <a class="col-sm-12 text-center listItem" href="/admin/createAdminForm">Add Admin</a>
+                <a class="col-sm-12 text-center listItem" href="/admin/manageAdminsForm">Admins List</a>
+                <a class="col-sm-12 text-center listItem" href="/admin/manageUsersForm">Users List</a>
+                <a class="col-sm-12 text-center listItem" href="/admin/createProductForm">Add Product</a>
+                <a class="col-sm-12 text-center listItem" href="/admin/manageProductsForm">Products List</a>
+                <a class="col-sm-12 text-center listItem" href="/admin/createCategoryForm">Add Category</a>
+                <a class="col-sm-12 text-center listItem" href="/admin/manageCategoriesForm">Categories List</a>
+                <a class="col-sm-12 text-center listItem" href="/admin/manageOrdersForm">Orders List</a>
             </nav>
             <div class="col-sm-10" id="content">
                 <div class="row">
@@ -31,27 +37,62 @@
                             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                                     <ul class="navbar">
                                         <li class="nav-item right-item">
-                                        <a class="nav-link" href="admin">
+                                        <a class="nav-link" href="/admin">
                                             <% if (admin) { %>
-                                                <img class="adminIcon" src="<%= admin[0].image %>">
+                                                <img class="adminIcon" src="<%= admin.image %>">
                                             <% } else { %>
                                                 <img class="adminIcon" src="../assets/images/userIcon.png">
                                             <% } %>
                                         </a>
                                         </li>
                                         <li class="nav-item right-item">
-                                            <p><%= admin[0].username %></p>
+                                            <p><%= admin.username %></p>
                                         </li>
                                         <li class="nav-item left-item">
                                             <p class="actionItem" onclick="logoutRedirect()">Logout</p>
                                         </li>
-                                        <li class="nav-item left-item">
-                                            <p class="actionItem">Change Password</p>
-                                        </li>
                                     </ul>
                             </nav>
-                            <div class="col-sm-12">
-                                <div id="admin-panel"></div>
+                            <div class="col-sm-12" id="admin-panel">
+                                <div class="row">
+                                    <div class="col-sm-3" style="text-align: center">
+                                        <div class="statInfo">
+                                            <h2>Orders</h2>
+                                            <p><%= orders.length %></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2" style="text-align: center">
+                                        <div class="statInfo">
+                                            <h2>Users</h2>
+                                            <p><%= users.length %></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2" style="text-align: center">
+                                        <div class="statInfo">
+                                            <h2>Admins</h2>
+                                            <p><%= admins.length %></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2" style="text-align: center">
+                                        <div class="statInfo">
+                                            <h2>Categories</h2>
+                                            <p><%= categories.length %></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3" style="text-align: center">
+                                        <div class="statInfo">
+                                            <h2>Products</h2>
+                                            <p><%= products.length %></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12" style="text-align: center">
+                                        <div class="statInfo">
+                                            <h2>Orders per week</h2>
+                                            <div id="5WeekData" style="display: none"><% let i = 0; for(; i < fiveWeeksSum.length; i ++){ %><div id="<%= i %>d3">{"id":"<%= fiveWeeksSum[i].id%>", "value":"<%= fiveWeeksSum[i].value%>", "region":"<%= fiveWeeksSum[i].region%>"}</div><% } %><div id="d3amount"><%= i%></div></div>
+                                            <svg id="generalStats" class="graph"></svg>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -64,5 +105,8 @@
             window.location.pathname = "logout";
         }
     </script>
+    <script src="https://d3js.org/d3.v5.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-axis@3" defer></script>
+    <script type="module" src="../assets/js/D3Custom.js" defer></script>
 </body>
 </html>

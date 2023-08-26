@@ -1,0 +1,18 @@
+[{
+  "_id": {
+    "$oid": "64e9084e5bd18e5400842c7e"
+  },
+  "name": "Men",
+  "slogan": "Turn heads and ignite conversations with these bold and daring sunglasses that defy convention.",
+  "image": "../assets/images/slider/slider_1.jpg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e908675bd18e5400842c82"
+  },
+  "name": "Women",
+  "slogan": "Make a grand entrance with these fashion-forward sunglasses that scream confidence and style.",
+  "image": "../assets/images/slider/slider_2.jpg",
+  "__v": 0
+}]

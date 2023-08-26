@@ -23,14 +23,14 @@ const index = async (req, res) => {
   const products = await productService.getProducts();
   const categories = await categoryService.getCategories();
   const user = await userCheck(req.session.userId);
-  res.render("../views/shop", { products, categories, user });
+  res.render("../views/shop", { products, categories, user, sessionId: req.session.userId });
 };
 
 const cart = async (req, res) => {
   const products = await productService.getProducts();
   const categories = await categoryService.getCategories();
   const user = await userCheck(req.session.userId);
-  res.render("../views/cart", { products, categories, user });
+  res.render("../views/cart", { products, categories, user, sessionId: req.session.userId });
 };
 
 
@@ -41,12 +41,12 @@ const category = async (req, res) => {
     const category = await categoryService.getCategoryByName(req.params.category);
     if(category){
       const products = await productService.getProducts(1, {categories: category.name});
-      res.render("../views/category", { products, categories, category, user });
+      res.render("../views/category", { products, categories, category, user, sessionId: req.session.userId });
     }else{
-      res.render("../views/404/category", { categories, user })
+      res.render("../views/404/category", { categories, user, sessionId: req.session.userId })
     }
   }else{
-    res.render("../views/404/category", { categories, user })
+    res.render("../views/404/category", { categories, user, sessionId: req.session.userId })
   }
 };
 
@@ -56,7 +56,7 @@ const product = async (req, res) => {
   const product = await productService.getProductById(req.params.product);
   const category = await categoryService.getCategoryByName(req.params.category);
   const products = await productService.getProductsByCategoryName(req.params.category);
-  res.render("../views/product", { categories, product, category, products, user });
+  res.render("../views/product", { categories, product, category, products, user, sessionId: req.session.userId });
 };
 
 const createCategory = async (req, res) => {

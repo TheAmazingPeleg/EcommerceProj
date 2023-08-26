@@ -1,0 +1,15 @@
+[{
+  "_id": {
+    "$oid": "64e91e12b30ad2facaaa69c9"
+  },
+  "username": "user",
+  "password": "$2a$10$PxxaTM5.80ClThAy9yCWxOldyr9xJULV9Vht5Q6jSzX9mlzz4kdEW",
+  "email": "user@user.user",
+  "firstName": "user",
+  "lastName": "user",
+  "__v": 0,
+  "address": "Eli Visel 2",
+  "city": "Rishon Lezion",
+  "country": "Israel",
+  "zip": "55555"
+}]
