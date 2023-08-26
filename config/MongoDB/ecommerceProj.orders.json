@@ -1,0 +1,57 @@
+[{
+  "_id": {
+    "$oid": "64e91ec4b30ad2facaaa6a12"
+  },
+  "userId": "64e91e12b30ad2facaaa69c9",
+  "firstName": "user",
+  "lastName": "user",
+  "address": "Eli Visel 2",
+  "country": "Israel",
+  "city": "Rishon Lezion",
+  "zip": "55555",
+  "cart": "[{\"id\":\"64e90b2cc53070bb10865654\",\"name\":\"RAY-BAN\",\"category\":\"Men\",\"image\":\"/assets/images/products/ray-ban1.avif\",\"price\":\"1120\",\"color\":\"000000\",\"size\":\"S\",\"amount\":\"5\"},{\"id\":\"64e90c48c53070bb10865660\",\"name\":\"DOLCE&GABBANA\",\"category\":\"Men\",\"image\":\"/assets/images/products/d&g1.avif\",\"price\":\"1280\",\"color\":\"A8A8A6\",\"size\":\"M\",\"amount\":\"5\"}]",
+  "status": "approved",
+  "cost": 12000,
+  "date": {
+    "$date": "2023-08-19T21:36:04.127Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e9f9940a508ecc8ebec43d"
+  },
+  "userId": "64e91e12b30ad2facaaa69c9",
+  "firstName": "user",
+  "lastName": "user",
+  "address": "Eli Visel 2",
+  "country": "Israel",
+  "city": "Rishon Lezion",
+  "zip": "55555",
+  "cart": "[{\"id\":\"64e920e6a84b941c8c818553\",\"name\":\"Prada\",\"category\":\"Women\",\"image\":\"/assets/images/products/prada1.avif\",\"price\":\"1600\",\"color\":\"000000\",\"size\":\"S\",\"amount\":\"12\"},{\"id\":\"64e92181a84b941c8c818557\",\"name\":\"MICHAEL KORS\",\"category\":\"Women\",\"image\":\"/assets/images/products/michaelkors1.avif\",\"price\":\"450\",\"color\":\"EBCFBE\",\"size\":\"S\",\"amount\":\"3\"}]",
+  "status": "waiting for approval",
+  "cost": 20550,
+  "date": {
+    "$date": "2023-08-26T13:09:40.970Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e9fccef94201901beebab9"
+  },
+  "userId": "64e91e12b30ad2facaaa69c9",
+  "firstName": "user",
+  "lastName": "user",
+  "address": "Eli Visel 2",
+  "country": "Israel",
+  "city": "Rishon Lezion",
+  "zip": "55555",
+  "cart": "[{\"id\":\"64e90b9ac53070bb10865659\",\"name\":\"OAKLEY\",\"category\":\"Men\",\"image\":\"/assets/images/products/oakley1.avif\",\"price\":\"630\",\"color\":\"000000\",\"size\":\"S\",\"amount\":\"2\"}]",
+  "status": "waiting for approval",
+  "cost": 1260,
+  "date": {
+    "$date": "2023-08-26T13:23:26.561Z"
+  },
+  "__v": 0
+}]

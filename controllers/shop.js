@@ -41,12 +41,12 @@ const category = async (req, res) => {
     const category = await categoryService.getCategoryByName(req.params.category);
     if(category){
       const products = await productService.getProducts(1, {categories: category.name});
-      res.render("../views/category", { products, categories, category, user });
+      res.render("../views/category", { products, categories, category, user, sessionId: req.session.userId });
     }else{
       res.render("../views/404/category", { categories, user, sessionId: req.session.userId })
     }
   }else{
-    res.render("../views/404/category", { categories, user })
+    res.render("../views/404/category", { categories, user, sessionId: req.session.userId })
   }
 };
 

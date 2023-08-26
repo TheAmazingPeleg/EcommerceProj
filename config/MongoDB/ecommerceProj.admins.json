@@ -1,0 +1,9 @@
+[{
+  "_id": {
+    "$oid": "64e908165bd18e5400842c64"
+  },
+  "username": "admin",
+  "password": "$2a$10$S6IZaAQgdzcg0C7XG87/s.MQag0i4if3wVw70zM5NYaWdA7c1CVem",
+  "image": "/assets/images/userIcon.png",
+  "__v": 0
+}]

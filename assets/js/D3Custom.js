@@ -1,10 +1,14 @@
-  const fetchData = document.getElementById('5WeekData').innerText;
-  const dataJson = JSON.parse(fetchData);
-  var data = [{
-    id: dataJson.id,
-    value: dataJson.value,
-    region: dataJson.region
-  }];
+  const data = [];
+  const d3BarsAmount = Number(document.getElementById('d3amount').innerText);
+  for(let j = 0; j < d3BarsAmount; j ++){
+    let fetchData = document.getElementById(j+'d3').innerText;
+    const dataJson = JSON.parse(fetchData);
+    data.push({
+      id: dataJson.id,
+      value: dataJson.value,
+      region: dataJson.region
+    });
+  }
 
   const MARGINS = {top: 20, bottom: 30};
   const CHART_WIDTH = 400;

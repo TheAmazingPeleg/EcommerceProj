@@ -1,0 +1,9 @@
+https://github.com/TheAmazingPeleg/EcommerceProj/
+
+Default user:
+user
+user123
+
+Default admin:
+admin
+123

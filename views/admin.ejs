@@ -88,7 +88,7 @@
                                     <div class="col-sm-12" style="text-align: center">
                                         <div class="statInfo">
                                             <h2>Orders per week</h2>
-                                            <div id="5WeekData" style="display: none"><% for(let i = 0; i < fiveWeeksSum.length; i ++){ %>{"id":"<%= fiveWeeksSum[i].id%>", "value":"<%= fiveWeeksSum[i].value%>", "region":"<%= fiveWeeksSum[i].region%>"}<% } %></div>
+                                            <div id="5WeekData" style="display: none"><% let i = 0; for(; i < fiveWeeksSum.length; i ++){ %><div id="<%= i %>d3">{"id":"<%= fiveWeeksSum[i].id%>", "value":"<%= fiveWeeksSum[i].value%>", "region":"<%= fiveWeeksSum[i].region%>"}</div><% } %><div id="d3amount"><%= i%></div></div>
                                             <svg id="generalStats" class="graph"></svg>
                                         </div>
                                     </div>
