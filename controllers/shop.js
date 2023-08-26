@@ -54,6 +54,7 @@ const product = async (req, res) => {
   const user = await userCheck(req.session.userId);
   const categories = await categoryService.getCategories();
   const product = await productService.getProductById(req.params.product);
+  console.log(product);
   const category = await categoryService.getCategoryByName(req.params.category);
   const products = await productService.getProductsByCategoryName(req.params.category);
   res.render("../views/product", { categories, product, category, products, user, sessionId: req.session.userId });
